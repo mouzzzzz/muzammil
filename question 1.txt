@@ -1,0 +1,279 @@
+login as: user1
+Keyboard-interactive authentication prompts from server:
+| Password for user1@kelassir:
+End of keyboard-interactive prompts from server
+    ┌──────────────────────────────────────────────────────────────────────┐
+    │                 • MobaXterm Personal Edition v23.1 •                 │
+    │               (SSH client, X server and network tools)               │
+    │                                                                      │
+    │ ⮞ SSH session to user1@192.168.26.130                                │
+    │   • Direct SSH      :  ✓                                             │
+    │   • SSH compression :  ✓                                             │
+    │   • SSH-browser     :  ✓                                             │
+    │   • X11-forwarding  :  ✗  (disabled or not supported by server)      │
+    │                                                                      │
+    │ ⮞ For more info, ctrl+click on help or visit our website.            │
+    └──────────────────────────────────────────────────────────────────────┘
+
+Last login: Sun Jul  9 02:14:15 2023 from 192.168.26.1
+FreeBSD 13.1-RELEASE releng/13.1-n250148-fc952ac2212 GENERIC
+
+Welcome to FreeBSD!
+
+Release Notes, Errata: https://www.FreeBSD.org/releases/
+Security Advisories:   https://www.FreeBSD.org/security/
+FreeBSD Handbook:      https://www.FreeBSD.org/handbook/
+FreeBSD FAQ:           https://www.FreeBSD.org/faq/
+Questions List: https://lists.FreeBSD.org/mailman/listinfo/freebsd-questions/
+FreeBSD Forums:        https://forums.FreeBSD.org/
+
+Documents installed with the system are in the /usr/local/share/doc/freebsd/
+directory, or can be installed later with:  pkg install en-freebsd-doc
+For other languages, replace "en" with a language code like de or fr.
+
+Show the version of FreeBSD installed:  freebsd-version ; uname -a
+Please include that output and any error messages when posting questions.
+Introduction to manual pages:  man man
+FreeBSD directory layout:      man hier
+
+To change this login announcement, see motd(5).
+When you've made modifications to a file in vi(1) and then find that
+you can't write it, type ``<ESC>!rm -f %'' then ``:w!'' to force the
+write
+
+This won't work if you don't have write permissions to the directory
+and probably won't be suitable if you're editing through a symbolic link.
+
+If you have sudo(8) installed and permissions to use it, type
+``<ESC>w ! sudo tee %'' to force a write.
+user1@kelassir:~ $ ee question1.c
+^[ (escape) menu ^y search prompt ^k delete line   ^p prev li     ^g prev page
+^o ascii code    ^x search        ^l undelete line ^n next li     ^v next page
+^u end of file   ^a begin of line ^w delete word   ^b back 1 char ^z next word
+^t top of text   ^e end of line   ^r restore word  ^f forward char
+^c command       ^d delete char   ^j undelete char              ESC-Enter: exit
+=====line 41 col 1 lines from top 41 ==========================================
+    printf("Child %d: I am interrupting!\n", childNumber);
+}
+
+int main() {
+    int i;
+    pid_t pid;
+
+    // Create 3 child processes
+    for (i = 1; i <= 3; i++) {
+        pid = fork();
+
+        if (pid < 0) {
+            // Error occurred
+            perror("Fork error");
+            exit(1);
+        } else if (pid == 0) {
+            // Child process
+            childInterruptMessage(i);
+            exit(0);
+        }
+    }
+
+    // Parent process
+    printf("Parent: Waiting for child processes to complete...\n");
+
+    // Wait for all child processes to complete
+    for (i = 1; i <= 3; i++) {
+        wait(NULL);
+    }
+
+    printf("Parent: All child processes completed.\n");
+
+    return 0;
+}
+
+"question1.c" 42 lines, 854 characters
+user1@kelassir:~ $ cc question1.c
+user1@kelassir:~ $ ./a.out
+Parent: Waiting for child processes to complete...
+Child 1: I am interrupting!
+Child 2: I am interrupting!
+Child 3: I am interrupting!
+Parent: All child processes completed.
+user1@kelassir:~ $ ee question1.c
+^[ (escape) menu ^y search prompt ^k delete line   ^p prev li     ^g prev page
+^o ascii code    ^x search        ^l undelete line ^n next li     ^v next page
+^u end of file   ^a begin of line ^w delete word   ^b back 1 char ^z next word
+^t top of text   ^e end of line   ^r restore word  ^f forward char
+^c command       ^d delete char   ^j undelete char              ESC-Enter: exit
+=====line 1 col 0 lines from top 1 ============================================
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+void childInterruptMessage(int childNumber) {
+    printf("Child %d: I am interrupting!\n", childNumber);
+}
+
+int main() {
+    int i;
+    pid_t pid;
+
+    // Create 3 child processes
+    for (i = 1; i <= 3; i++) {
+        pid = fork();
+
+        if (pid < 0) {
+            // Error occurred
+            perror("Fork error");
+            exit(1);
+        } else if (pid == 0) {
+            // Child process
+            childInterruptMessage(i);
+            exit(0);
+        }
+    }
+
+    // Parent process
+    printf("Parent: Waiting for child processes to complete...\n");
+
+    // Wait for all child processes to complete
+    for (i = 1; i <= 3; i++) {
+        wait(NULL);
+login as: user1
+Keyboard-interactive authentication prompts from server:
+| Password for user1@kelassir:
+End of keyboard-interactive prompts from server
+    ┌──────────────────────────────────────────────────────────────────────┐
+    │                 • MobaXterm Personal Edition v23.1 •                 │
+    │               (SSH client, X server and network tools)               │
+    │                                                                      │
+    │ ⮞ SSH session to user1@192.168.26.130                                │
+    │   • Direct SSH      :  ✓                                             │
+    │   • SSH compression :  ✓                                             │
+    │   • SSH-browser     :  ✓                                             │
+    │   • X11-forwarding  :  ✗  (disabled or not supported by server)      │
+    │                                                                      │
+    │ ⮞ For more info, ctrl+click on help or visit our website.            │
+    └──────────────────────────────────────────────────────────────────────┘
+
+Last login: Sun Jul  9 02:14:15 2023 from 192.168.26.1
+FreeBSD 13.1-RELEASE releng/13.1-n250148-fc952ac2212 GENERIC
+
+Welcome to FreeBSD!
+
+Release Notes, Errata: https://www.FreeBSD.org/releases/
+Security Advisories:   https://www.FreeBSD.org/security/
+FreeBSD Handbook:      https://www.FreeBSD.org/handbook/
+FreeBSD FAQ:           https://www.FreeBSD.org/faq/
+Questions List: https://lists.FreeBSD.org/mailman/listinfo/freebsd-questions/
+FreeBSD Forums:        https://forums.FreeBSD.org/
+
+Documents installed with the system are in the /usr/local/share/doc/freebsd/
+directory, or can be installed later with:  pkg install en-freebsd-doc
+For other languages, replace "en" with a language code like de or fr.
+
+Show the version of FreeBSD installed:  freebsd-version ; uname -a
+Please include that output and any error messages when posting questions.
+Introduction to manual pages:  man man
+FreeBSD directory layout:      man hier
+
+To change this login announcement, see motd(5).
+When you've made modifications to a file in vi(1) and then find that
+you can't write it, type ``<ESC>!rm -f %'' then ``:w!'' to force the
+write
+
+This won't work if you don't have write permissions to the directory
+and probably won't be suitable if you're editing through a symbolic link.
+
+If you have sudo(8) installed and permissions to use it, type
+``<ESC>w ! sudo tee %'' to force a write.
+user1@kelassir:~ $ ee question1.c
+^[ (escape) menu ^y search prompt ^k delete line   ^p prev li     ^g prev page
+^o ascii code    ^x search        ^l undelete line ^n next li     ^v next page
+^u end of file   ^a begin of line ^w delete word   ^b back 1 char ^z next word
+^t top of text   ^e end of line   ^r restore word  ^f forward char
+^c command       ^d delete char   ^j undelete char              ESC-Enter: exit
+=====line 41 col 1 lines from top 41 ==========================================
+    printf("Child %d: I am interrupting!\n", childNumber);
+}
+
+int main() {
+    int i;
+    pid_t pid;
+
+    // Create 3 child processes
+    for (i = 1; i <= 3; i++) {
+        pid = fork();
+
+        if (pid < 0) {
+            // Error occurred
+            perror("Fork error");
+            exit(1);
+        } else if (pid == 0) {
+            // Child process
+            childInterruptMessage(i);
+            exit(0);
+        }
+    }
+
+    // Parent process
+    printf("Parent: Waiting for child processes to complete...\n");
+
+    // Wait for all child processes to complete
+    for (i = 1; i <= 3; i++) {
+        wait(NULL);
+    }
+
+    printf("Parent: All child processes completed.\n");
+
+    return 0;
+}
+
+"question1.c" 42 lines, 854 characters
+user1@kelassir:~ $ cc question1.c
+user1@kelassir:~ $ ./a.out
+Parent: Waiting for child processes to complete...
+Child 1: I am interrupting!
+Child 2: I am interrupting!
+Child 3: I am interrupting!
+Parent: All child processes completed.
+user1@kelassir:~ $ ee question1.c
+^[ (escape) menu ^y search prompt ^k delete line   ^p prev li     ^g prev page
+^o ascii code    ^x search        ^l undelete line ^n next li     ^v next page
+^u end of file   ^a begin of line ^w delete word   ^b back 1 char ^z next word
+^t top of text   ^e end of line   ^r restore word  ^f forward char
+^c command       ^d delete char   ^j undelete char              ESC-Enter: exit
+=====line 42 col 0 lines from top 42 ==========================================
+    printf("Child %d: I am interrupting!\n", childNumber);
+}
+
+int main() {
+    int i;
+    pid_t pid;
+
+    // Create 3 child processes
+    for (i = 1; i <= 3; i++) {
+        pid = fork();
+
+        if (pid < 0) {
+            // Error occurred
+            perror("Fork error");
+            exit(1);
+        } else if (pid == 0) {
+            // Child process
+            childInterruptMessage(i);
+            exit(0);
+        }
+    }
+
+    // Parent process
+    printf("Parent: Waiting for child processes to complete...\n");
+
+    // Wait for all child processes to complete
+    for (i = 1; i <= 3; i++) {
+        wait(NULL);
+    }
+
+    printf("Parent: All child processes completed.\n");
+
+    return 0;
+}

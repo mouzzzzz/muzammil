@@ -1,0 +1,14 @@
+def fibonacci_series(n):
+    fib_list = [0, 1]
+    while fib_list[-1] + fib_list[-2] <= n:
+        fib_list.append(fib_list[-1] + fib_list[-2])
+    return fib_list[1:]  # Excluding the first element 0
+
+def main():
+    upper_limit = 10000
+    fibonacci_numbers = fibonacci_series(upper_limit)
+    print(fibonacci_numbers[0])  # First number in the series
+    print(fibonacci_numbers[-1])  # Last number in the series
+
+if __name__ == "__main__":
+    main()
